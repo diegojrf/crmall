@@ -75,7 +75,7 @@ namespace crmall.DAO
             catch (Exception ex)
             {
                 retorno = false;
-                Console.WriteLine(ex.Message + " - Dentro do ExecutaComando");
+                Console.WriteLine(ex.Message + " - Dentro do ExecutaComando.");
                 Console.WriteLine(ex);
                 throw new Exception("Erro ao executar o comando SQL:", ex);
             }
