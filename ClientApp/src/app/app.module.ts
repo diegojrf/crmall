@@ -12,6 +12,7 @@ import { FetchDataComponent } from "./fetch-data/fetch-data.component";
 import { ModalComponent } from './modal/modal.component';
 import { AddClienteModalComponent } from './add-cliente-modal/add-cliente-modal.component';
 import { CarregandoComponent } from './carregando/carregando.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CarregandoComponent } from './carregando/carregando.component';
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
     FormsModule,
+    NgbModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, pathMatch: "full" },
       { path: "counter", component: CounterComponent },
