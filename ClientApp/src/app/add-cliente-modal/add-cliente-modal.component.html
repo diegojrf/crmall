@@ -1,0 +1,19 @@
+<app-modal>
+  <app-carregando (elemento)="elemento = $event"></app-carregando>
+  <ng-container titulo>
+    Cadastro de Cliente
+  </ng-container>
+  <ng-container corpo>
+    <form #formulario="ngForm">
+
+    </form>
+  </ng-container>
+  <ng-container botoes>
+    <button class="btn btn-info" name="add" [disabled]="!formulario.form.valid">
+      Gravar
+    </button>
+    <button type="button" name="cancelar" class="btn btn-warning" data-dismiss="modal">
+      Fechar
+    </button>
+  </ng-container>
+</app-modal>

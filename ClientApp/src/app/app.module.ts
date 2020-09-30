@@ -9,7 +9,9 @@ import { NavMenuComponent } from "./nav-menu/nav-menu.component";
 import { HomeComponent } from "./home/home.component";
 import { CounterComponent } from "./counter/counter.component";
 import { FetchDataComponent } from "./fetch-data/fetch-data.component";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { ModalComponent } from './modal/modal.component';
+import { AddClienteModalComponent } from './add-cliente-modal/add-cliente-modal.component';
+import { CarregandoComponent } from './carregando/carregando.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
+    ModalComponent,
+    AddClienteModalComponent,
+    CarregandoComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, pathMatch: "full" },
       { path: "counter", component: CounterComponent },
@@ -33,4 +37,4 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
