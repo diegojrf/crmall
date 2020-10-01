@@ -8,7 +8,7 @@ import { Cliente } from "../model/cliente";
 export class ClienteService {
   private url = "https://localhost:5001/Cliente";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public grava(cliente: Cliente) {
     const config = {
@@ -27,7 +27,7 @@ export class ClienteService {
       },
       params: params,
     };
-    return this.http.delete(this.url, config);
+    return this.http.delete<boolean>(this.url, config);
   }
 
   public buscaClientes(nome: string) {

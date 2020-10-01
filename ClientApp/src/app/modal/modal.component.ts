@@ -7,8 +7,6 @@ declare const $: any;
   templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit, AfterViewInit {
-  // @ViewChild('modal', { static: false })
-  // elemento: ElementRef;
 
   constructor(private elemento: ElementRef) { }
 

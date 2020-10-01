@@ -22,7 +22,7 @@ USE `sys` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sys`.`clientes` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `cliente` VARCHAR(100) NULL,
+  `nome` VARCHAR(100) NULL,
   `data_nascimento` DATETIME NULL,
   `sexo` VARCHAR(1) NULL,
   `cep` VARCHAR(9) NULL,

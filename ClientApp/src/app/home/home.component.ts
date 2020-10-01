@@ -8,7 +8,7 @@ import { ClienteService } from "../service/cliente.service";
 
 @Component({
   selector: "app-home",
-  templateUrl: "./home.component.html",
+  templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
   public elemento;
@@ -25,23 +25,21 @@ export class HomeComponent implements OnInit {
     private http: HttpClient,
     private clienteService: ClienteService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.clienteService.buscaClientes("die").subscribe(
+    this.buscaPorNome();
+  }
+
+  buscaPorNome() {
+    this.clienteService.buscaClientes(this.chave).subscribe(
       (retorno) => {
         this.clientes = retorno;
-        console.log(retorno);
       },
       (erro) => {
         Swal.fire("Opss!", "Não foi possível buscar os clientes.", "error");
       }
     );
-  }
-
-  teste() {
-    this.toastr.success("Testando o Toastr na prova", "Teste");
-    Swal.fire("Teste", "Testando sweetalert", "success");
   }
 
   abreModal() {

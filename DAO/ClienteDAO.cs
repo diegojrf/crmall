@@ -81,23 +81,23 @@ namespace crmall.DAO
 
         public List<Cliente> BuscaNome(string nome)
         {
-            if (!String.IsNullOrEmpty(nome))
+            ComandoSQL.Parameters.Clear();
+            if (nome == null)
             {
-                ComandoSQL.Parameters.Clear();
-                ComandoSQL.Parameters.AddWithValue("@NOME", nome);
-                ComandoSQL.CommandText = "SELECT * FROM CLIENTES WHERE UPPER(NOME) LIKE UPPER(CONCAT('%',@NOME,'%'))";
-                DataTable dt = ExecutaSelect();
-                if (dt != null)
-                {
-                    return CriaListaCliente(dt);
-                }
-                else
-                    return null;
+                ComandoSQL.CommandText = "SELECT * FROM CLIENTES";
             }
             else
             {
-                return null;
+                ComandoSQL.Parameters.AddWithValue("@NOME", nome);
+                ComandoSQL.CommandText = "SELECT * FROM CLIENTES WHERE UPPER(NOME) LIKE UPPER(CONCAT('%',@NOME,'%'))";
             }
+            DataTable dt = ExecutaSelect();
+            if (dt != null)
+            {
+                return CriaListaCliente(dt);
+            }
+            else
+                return null;
         }
 
         public Cliente CriaCliente(DataRow linha)
