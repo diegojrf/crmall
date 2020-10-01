@@ -1,7 +1,11 @@
 <app-carregando (elemento)="elemento = $event"></app-carregando>
 <h1>Clientes</h1>
-<a href="javascript:void(0)" (click)="abreModal()" ngbTooltip="Cadastre novos clientes.">
-  <span style="color: limegreen;">
+<a
+  href="javascript:void(0)"
+  (click)="abreModal()"
+  ngbTooltip="Cadastre novos clientes."
+>
+  <span style="color: limegreen">
     <i class="fas fa-plus-square fa-lg"></i>
   </span>
   Adicionar Cliente
@@ -12,6 +16,72 @@
     <h5>Listagem de Clientes</h5>
   </div>
   <div class="card-body">
+    <ng-container *ngIf="clientes.length > 0; else vazio">
+      <div class="card">
+        <div class="card-body">
+          <form action="">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="title" class="title">Nome</label>
+                  <input
+                    type="text"
+                    name="nome"
+                    class="form-control"
+                    [(ngModel)]="chave"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
 
+      <table class="table">
+        <tr>
+          <th>Nome</th>
+          <th>Data de Nascimento</th>
+          <th>Sexo</th>
+          <th>Cidade</th>
+          <th>Ação</th>
+        </tr>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{ cliente.nome }}</td>
+          <td>
+            {{
+              cliente.dataNascimento != null &&
+              cliente.dataNascimento != undefined
+                ? (cliente.dataNascimento | date: "dd/MM/yyyy")
+                : ""
+            }}
+          </td>
+          <td>
+            {{
+              cliente.sexo == "M"
+                ? "Masculino"
+                : cliente.sexo == "F"
+                ? "Feminino"
+                : ""
+            }}
+          </td>
+          <td>{{ cliente.cidade }}-{{ cliente.estado }}</td>
+          <td>
+            <i
+              class="far fa-edit fa-lg"
+              style="cursor: pointer"
+              ngbTooltip="Editar Cliente"
+            ></i>
+            <i
+              class="far fa-trash-alt fa-lg"
+              style="cursor: pointer"
+              ngbTooltip="Excluir Cliente"
+            ></i>
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+    <ng-template #vazio>
+      <p>Nenhum Cliente encontrado.</p>
+    </ng-template>
   </div>
 </div>

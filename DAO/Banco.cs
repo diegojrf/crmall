@@ -17,7 +17,7 @@ namespace crmall.DAO
 
         protected Banco()
         {
-            _strConexao = @"Server=localhost:3306;Database=sys;Uid=root;Pwd=diego123456;";
+            _strConexao = @"Server=localhost;Port=3306;Database=sys;Uid=root;Pwd=diego123456;";
             _conn = new MySqlConnection(_strConexao);
             _comandoSQL = new MySqlCommand();
             _comandoSQL.Connection = _conn;
