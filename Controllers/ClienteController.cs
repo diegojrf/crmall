@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using crmall.DAO;
 using crmall.Model;
@@ -15,6 +16,12 @@ namespace crmall.Controllers
         {
             if (cliente != null && ModelState.IsValid)
             {
+                if (cliente.DataNascimento >= DateTime.Today)
+                {
+                    List<object> erros = new List<object>();
+                    erros.Add(new { campo = "DataNascimento", msg = "Data deve ser menor que a data atual" });
+                    return BadRequest(erros);
+                }
                 if (new ClienteDAO().Grava(cliente))
                 {
                     return Ok(true);

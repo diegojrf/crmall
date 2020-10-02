@@ -34,11 +34,11 @@ export class AddClienteModalComponent implements OnInit, AfterViewInit {
     private clienteService: ClienteService,
     private http: HttpClient,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public gravar() {
     this.elemento.style.display = "block";
@@ -59,12 +59,9 @@ export class AddClienteModalComponent implements OnInit, AfterViewInit {
       (erro) => {
         let msg = "";
         try {
-          const a = <[]>erro.error.errors;
-          console.log(a);
-          erro.error.errors.forEach((elemento) => {
-            console.log("entrei");
-            console.log(elemento);
-            msg += elemento[0] + "<br>";
+          const a = erro.error.errors;
+          Object.keys(a).forEach((item) => {
+            msg += a[item][0] + "<br>";
           });
           Swal.fire("Opss!", msg, "error");
         } catch {

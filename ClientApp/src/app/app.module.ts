@@ -16,6 +16,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxPaginationModule } from "ngx-pagination";
+import { ValidaDataMenorDirective } from './diretivas/valida-data-menor.directive';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NgxPaginationModule } from "ngx-pagination";
     ModalComponent,
     AddClienteModalComponent,
     CarregandoComponent,
+    ValidaDataMenorDirective,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

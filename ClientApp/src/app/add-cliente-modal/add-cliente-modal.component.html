@@ -23,13 +23,13 @@
             <label for="data" class="title">*Nascimento</label>
             <input type="date" id="data" name="data" class="form-control"
               [ngModel]="cliente.dataNascimento | date:'yyyy-MM-dd'" (ngModelChange)="cliente.dataNascimento =
-            auxData($event)" required>
+            auxData($event)" ngbTooltip="Data deve ser menor que a data atual" validaDataMenor required>
           </div>
         </div>
         <div class="col-md-2">
           <div class="form-group">
             <label for="sexo" class="title">*Sexo</label>
-            <select class="form-control" id="sexo" name="sexo" [(ngModel)]="cliente.sexo">
+            <select class="form-control" id="sexo" name="sexo" [(ngModel)]="cliente.sexo" required>
               <option class="form-control" value=""></option>
               <option class="form-control" value="M">Masculino</option>
               <option class="form-control" value="F">Feminino</option>
