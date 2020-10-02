@@ -101,7 +101,7 @@ export class AddClienteModalComponent implements OnInit, AfterViewInit {
   confirmaCep() {
     console.log(this.cliente.cep);
     if (this.cliente.cep.length < 8) {
-      console.log("aqui";)
+      console.log("aqui");
       this.buscaCep();
     }
   }
