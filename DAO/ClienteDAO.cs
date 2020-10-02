@@ -84,12 +84,12 @@ namespace crmall.DAO
             ComandoSQL.Parameters.Clear();
             if (nome == null)
             {
-                ComandoSQL.CommandText = "SELECT * FROM CLIENTES";
+                ComandoSQL.CommandText = "SELECT * FROM CLIENTES ORDER BY NOME";
             }
             else
             {
                 ComandoSQL.Parameters.AddWithValue("@NOME", nome);
-                ComandoSQL.CommandText = "SELECT * FROM CLIENTES WHERE UPPER(NOME) LIKE UPPER(CONCAT('%',@NOME,'%'))";
+                ComandoSQL.CommandText = "SELECT * FROM CLIENTES WHERE UPPER(NOME) LIKE UPPER(CONCAT('%',@NOME,'%')) ORDER BY NOME";
             }
             DataTable dt = ExecutaSelect();
             if (dt != null)
@@ -138,6 +138,19 @@ namespace crmall.DAO
             else
             {
                 return null;
+            }
+        }
+
+        public bool TestaConexao()
+        {
+            if (AbreConexao())
+            {
+                FechaConexao();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

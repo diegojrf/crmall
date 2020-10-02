@@ -1,18 +1,105 @@
 <app-modal>
   <app-carregando (elemento)="elemento = $event"></app-carregando>
   <ng-container titulo>
-    Cadastro de Cliente
+    <ng-container *ngIf="cliente.id > 0; else update">
+      Alterar cliente {{nomeEdit}}
+    </ng-container>
+    <ng-template #update>
+      Cadastro de Cliente
+    </ng-template>
   </ng-container>
   <ng-container corpo>
     <form #formulario="ngForm">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="form-group">
+            <label for="nome" class="title">*Nome</label>
+            <input type="text" id="nome" name="nome" class="form-control" [(ngModel)]="cliente.nome" maxlength="100"
+              required>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="data" class="title">*Nascimento</label>
+            <input type="date" id="data" name="data" class="form-control"
+              [ngModel]="cliente.dataNascimento | date:'yyyy-MM-dd'" (ngModelChange)="cliente.dataNascimento =
+            auxData($event)" required>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="sexo" class="title">*Sexo</label>
+            <select class="form-control" id="sexo" name="sexo" [(ngModel)]="cliente.sexo">
+              <option class="form-control" value=""></option>
+              <option class="form-control" value="M">Masculino</option>
+              <option class="form-control" value="F">Feminino</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="cep" class="title">CEP</label>
+            <input type="text" id="cep" name="cep" [(ngModel)]="cliente.cep" maxlength="8" class="form-control"
+              (ngModelChange)="buscaCep()" (focusout)="confirmaCep()">
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <label for="endereco" class="title">Endereço</label>
+            <input type="text" id="endereco" name="endereco" [(ngModel)]="cliente.endereco" maxlength="150"
+              class="form-control" [disabled]="!cepOk">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="numero" class="title">Número</label>
+            <input type="text" id="numero" name="numero" [(ngModel)]="cliente.numero" maxlength="10"
+              class="form-control" [disabled]="!cepOk">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="bairro" class="title">Bairro</label>
+            <input type="text" id="bairro" name="bairro" [(ngModel)]="cliente.bairro" maxlength="100"
+              class="form-control" [disabled]="!cepOk">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <div class="form-group">
+            <label for="complemento" class="title">Complemento</label>
+            <input type="text" id="complemento" name="complemento" [(ngModel)]="cliente.complemento" maxlength="100"
+              class="form-control" [disabled]="!cepOk">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="uf" class="title">Uf</label>
+            <input type="text" id="uf" name="uf" [(ngModel)]="cliente.estado" maxlength="2" class="form-control"
+              disabled>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <label for="cidade" class="title">Cidade</label>
+            <input type="text" id="cidade" name="cidade" [(ngModel)]="cliente.cidade" maxlength="100"
+              class="form-control" disabled>
+          </div>
+        </div>
+      </div>
     </form>
   </ng-container>
   <ng-container botoes>
-    <button class="btn btn-info" name="add" [disabled]="!formulario.form.valid">
-      Gravar
-    </button>
-    <button type="button" name="cancelar" class="btn btn-warning" data-dismiss="modal">
+    <span [ngbTooltip]="!formulario.form.valid ? 'Preencha os campos obrigatórios.' : 'Gravar cliente'">
+      <button class="btn btn-info" name="add" (click)="gravar()" [disabled]="!formulario.form.valid">
+        Gravar
+      </button>
+    </span>
+    <button type="button" name="cancelar" class="btn btn-warning" (click)="hide()">
       Fechar
     </button>
   </ng-container>

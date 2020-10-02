@@ -7,7 +7,7 @@
   Adicionar Cliente
 </a>
 <div class="card">
-  <app-add-cliente-modal></app-add-cliente-modal>
+  <app-add-cliente-modal (envia)="buscaPorNome()"></app-add-cliente-modal>
   <div class="card-header text-primary">
     <h5>Listagem de Clientes</h5>
   </div>
@@ -18,9 +18,15 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="title" class="title">Nome</label>
+                <label class="title">Nome</label>
                 <input type="text" name="nome" class="form-control" [(ngModel)]="chave"
                   (ngModelChange)="buscaPorNome()" />
+              </div>
+            </div>
+            <div class="col-md-2 px-1">
+              <div class="form-group">
+                <label class="title">Itens por página</label>
+                <input type="number" name="qtde" class="form-control" [(ngModel)]="qtdeItens" width="5px" />
               </div>
             </div>
           </div>
@@ -30,13 +36,21 @@
     <ng-container *ngIf="clientes.length > 0; else vazio">
       <table class="table">
         <tr>
-          <th>Nome</th>
-          <th>Data de Nascimento</th>
-          <th>Sexo</th>
-          <th>Cidade</th>
-          <th>Ação</th>
+          <th width="35%">Nome</th>
+          <th width="15%">Nascimento</th>
+          <th width="10%">Sexo</th>
+          <th width="30%">Cidade</th>
+          <th width="10%">Ação</th>
         </tr>
-        <tr *ngFor="let cliente of clientes">
+        <tr *ngFor="
+            let cliente of clientes
+              | paginate
+                : {
+                    itemsPerPage: qtdeItens,
+                    currentPage: paginaAtual,
+                    id: 'pag'
+                  }
+          ">
           <td>{{ cliente.nome }}</td>
           <td>
             {{
@@ -57,10 +71,21 @@
           </td>
           <td>{{ cliente.cidade }}-{{ cliente.estado }}</td>
           <td>
-            <i class="far fa-edit fa-lg" style="cursor: pointer" ngbTooltip="Editar Cliente"></i>
-            <i class="far fa-trash-alt fa-lg" style="cursor: pointer" ngbTooltip="Excluir Cliente"></i>
+            <i class="far fa-edit fa-lg" style="cursor: pointer" ngbTooltip="Editar Cliente"
+              (click)="editaCliente(cliente)"></i>
+            <i class="far fa-trash-alt fa-lg" style="cursor: pointer" ngbTooltip="Excluir Cliente"
+              (click)="excluiCliente(cliente)"></i>
           </td>
         </tr>
+        <tfoot>
+          <tr>
+            <td colspan="100%" class="text-center">
+              <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próxima"
+                id="pag">
+              </pagination-controls>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </ng-container>
     <ng-template #vazio>

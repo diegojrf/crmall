@@ -8,7 +8,7 @@ import { Cliente } from "../model/cliente";
 export class ClienteService {
   private url = "https://localhost:5001/Cliente";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public grava(cliente: Cliente) {
     const config = {
@@ -39,5 +39,14 @@ export class ClienteService {
       params: params,
     };
     return this.http.get<Cliente[]>(this.url, config);
+  }
+
+  public testaConexao() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    return this.http.get<boolean>(this.url + "/conexao", config);
   }
 }

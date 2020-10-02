@@ -17,17 +17,11 @@ namespace crmall.Controllers
             {
                 if (new ClienteDAO().Grava(cliente))
                 {
-                    return Ok(new
-                    {
-                        status = true
-                    });
+                    return Ok(true);
                 }
                 else
                 {
-                    return Ok(new
-                    {
-                        status = false
-                    });
+                    return Ok(false);
                 }
             }
             else
@@ -67,6 +61,12 @@ namespace crmall.Controllers
                 }
             }
             return erros;
+        }
+
+        [HttpGet("conexao")]
+        public bool TestarConexao()
+        {
+            return new ClienteDAO().TestaConexao();
         }
     }
 }

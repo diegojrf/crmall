@@ -15,6 +15,7 @@ import { CarregandoComponent } from "./carregando/carregando.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgxPaginationModule } from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     FormsModule,
     NgbModule,
     BrowserAnimationsModule,
+    NgxPaginationModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: "", component: HomeComponent, pathMatch: "full" },
