@@ -57,11 +57,14 @@ export class AddClienteModalComponent implements OnInit, AfterViewInit {
         }
       },
       (erro) => {
-        console.log(erro);
         let msg = "";
         try {
-          erro.error.forEach((elemento) => {
-            msg += elemento.msg + "<br>";
+          const a = <[]>erro.error.errors;
+          console.log(a);
+          erro.error.errors.forEach((elemento) => {
+            console.log("entrei");
+            console.log(elemento);
+            msg += elemento[0] + "<br>";
           });
           Swal.fire("Opss!", msg, "error");
         } catch {
@@ -73,7 +76,7 @@ export class AddClienteModalComponent implements OnInit, AfterViewInit {
   }
 
   buscaCep() {
-    if (this.cliente.cep.length === 8) {
+    if (this.cliente.cep !== undefined && this.cliente.cep.length === 8) {
       this.http
         .get(
           `https://viacep.com.br/ws/${this.cliente.cep.replace("-", "")}/json/`
@@ -100,9 +103,8 @@ export class AddClienteModalComponent implements OnInit, AfterViewInit {
 
   confirmaCep() {
     console.log(this.cliente.cep);
-    if (this.cliente.cep.length < 8) {
-      console.log("aqui");
-      this.buscaCep();
+    if (this.cliente.cep !== undefined && this.cliente.cep.length < 8) {
+      this.limpaEndereco();
     }
   }
 
